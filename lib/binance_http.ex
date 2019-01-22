@@ -30,14 +30,7 @@ defmodule BinanceHttp do
 
     argument_string = URI.encode_query(params)
 
-    signature =
-      :crypto.hmac(
-        :sha256,
-        secret_key,
-        argument_string
-      )
-      |> Base.encode16()
-
+    signature = BinanceHelper.sign(secret_key, argument_string)
     get_binance("#{url}?#{argument_string}&signature=#{signature}", headers)
   end
 
@@ -48,19 +41,11 @@ defmodule BinanceHttp do
       |> Enum.map(fn x -> Tuple.to_list(x) |> Enum.join("=") end)
       |> Enum.join("&")
 
-    # generate signature
-    signature =
-      :crypto.hmac(
-        :sha256,
-        Application.get_env(:binance, :secret_key),
-        argument_string
-      )
-      |> Base.encode16()
-
+    signature = BinanceHelper.sign(BinanceHelper.secret_key, argument_string)
     body = "#{argument_string}&signature=#{signature}"
 
     case HTTPoison.post("#{@endpoint}#{url}", body, [
-           {"X-MBX-APIKEY", Application.get_env(:binance, :api_key)}
+           {"X-MBX-APIKEY", BinanceHelper.api_key}
          ]) do
       {:error, err} ->
         {:error, {:http_error, err}}
