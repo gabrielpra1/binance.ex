@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "address=addresskopsdkdpo&amount=1.0e-6&asset=BTC&recvWindow=1000&timestamp=1548194582992&signature=***",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/withdraw.html"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"msg\":\"Minimum withdrawal amount not met.\",\"success\":false,\"objs\":[0.002]}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Tue, 22 Jan 2019 22:03:03 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'self'",
+        "X-Content-Security-Policy": "default-src 'self'",
+        "X-WebKit-CSP": "default-src 'self'",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 1fd7f1e10a887febe671a5af6cee08c6.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "gecwLj5RXga0jOIUpCF9SvZIT-g8jz5M3qnCYWS0r8CKv-lbsN18Ag=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

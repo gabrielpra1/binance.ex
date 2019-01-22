@@ -18,11 +18,10 @@ defmodule Binance do
   defp get_binance(url, params, secret_key, api_key) do
     headers = [{"X-MBX-APIKEY", api_key}]
     receive_window = 5000
-    ts = DateTime.utc_now() |> DateTime.to_unix(:millisecond)
 
     params =
       Map.merge(params, %{
-        timestamp: ts,
+        timestamp: get_timestamp(),
         recvWindow: receive_window
       })
 
@@ -37,6 +36,11 @@ defmodule Binance do
       |> Base.encode16()
 
     get_binance("#{url}?#{argument_string}&signature=#{signature}", headers)
+  end
+
+  # timestamp needs to be in milliseconds
+  defp get_timestamp do
+    DateTime.utc_now() |> DateTime.to_unix(:millisecond)
   end
 
   defp post_binance(url, params) do
@@ -271,12 +275,8 @@ defmodule Binance do
       ) do
     timestamp =
       case timestamp do
-        # timestamp needs to be in milliseconds
-        nil ->
-          :os.system_time(:millisecond)
-
-        t ->
-          t
+        nil -> get_timestamp()
+        t -> t
       end
 
     arguments =
@@ -495,6 +495,18 @@ defmodule Binance do
 
       err ->
         err
+    end
+  end
+
+  def withdraw(asset, address, amount, recvWindow \\ 1000) do
+    arguments = %{
+      asset: asset, address: address, amount: amount,
+      recvWindow: recvWindow, timestamp: get_timestamp()
+    }
+
+    case post_binance("/wapi/v3/withdraw.html", arguments) do
+      {:ok, %{"success" => false, "msg" => msg}} -> {:error, {:binance_error,  msg}}
+      data -> data
     end
   end
 end
