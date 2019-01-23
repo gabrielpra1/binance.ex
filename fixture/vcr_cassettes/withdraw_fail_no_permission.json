@@ -1,0 +1,41 @@
+[
+  {
+    "request": {
+      "body": "address=addresskopsdkdpo&amount=1.0e-6&asset=BTC&signature=***",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/withdraw.html"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"msg\":\"You don't have permission.\",\"success\":false}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Tue, 22 Jan 2019 21:46:54 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'self'",
+        "X-Content-Security-Policy": "default-src 'self'",
+        "X-WebKit-CSP": "default-src 'self'",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 e0c6cc8d3966b5d8066dcc9d6917bdbc.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "Tsqsunf2BbCl8kUn2wAtaccczApMFVwE83PPmoq5c3JWLRMhXMQYOQ=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
