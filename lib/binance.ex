@@ -1,5 +1,4 @@
 defmodule Binance do
-
   @doc """
   Pings binance API. Returns `{:ok, %{}}` if successful, `{:error, reason}` otherwise
   """
@@ -142,7 +141,12 @@ defmodule Binance do
   """
 
   def get_account() do
-    case BinanceHttp.get_binance("/api/v3/account", %{}, BinanceHelper.secret_key, BinanceHelper.api_key) do
+    case BinanceHttp.get_binance(
+           "/api/v3/account",
+           %{},
+           BinanceHelper.secret_key(),
+           BinanceHelper.api_key()
+         ) do
       {:ok, data} -> {:ok, Binance.Account.new(data)}
       error -> error
     end
@@ -174,7 +178,7 @@ defmodule Binance do
       ) do
     timestamp =
       case timestamp do
-        nil -> BinanceHelper.timestamp_ms
+        nil -> BinanceHelper.timestamp_ms()
         t -> t
       end
 
@@ -337,13 +341,27 @@ defmodule Binance do
   end
 
   def withdraw(asset, address, amount, recvWindow \\ 1000) do
+    withdraw(
+      BinanceHelper.api_key(),
+      BinanceHelper.secret_key(),
+      asset,
+      address,
+      amount,
+      recvWindow
+    )
+  end
+
+  def withdraw(api_key, secret_key, asset, address, amount, recvWindow \\ 1000) do
     arguments = %{
-      asset: asset, address: address, amount: amount,
-      recvWindow: recvWindow, timestamp: BinanceHelper.timestamp_ms
+      asset: asset,
+      address: address,
+      amount: amount,
+      recvWindow: recvWindow,
+      timestamp: BinanceHelper.timestamp_ms()
     }
 
-    case BinanceHttp.post_binance("/wapi/v3/withdraw.html", arguments) do
-      {:ok, %{"success" => false, "msg" => msg}} -> {:error, {:binance_error,  msg}}
+    case BinanceHttp.post_binance("/wapi/v3/withdraw.html", api_key, secret_key, arguments) do
+      {:ok, %{"success" => false, "msg" => msg}} -> {:error, {:binance_error, msg}}
       data -> data
     end
   end

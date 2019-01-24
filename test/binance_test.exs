@@ -271,19 +271,28 @@ defmodule BinanceTest do
   describe "withdraw" do
     test "can't make withdraw if doesn't have permission" do
       use_cassette "withdraw_fail_no_permission" do
-        assert {:error, {:binance_error, "You don't have permission."}} == Binance.withdraw("BTC", "address", 0.000001)
+        assert {:error, {:binance_error, "You don't have permission."}} ==
+                 Binance.withdraw("BTC", "address", 0.000001)
       end
     end
 
     test "can't make withdraw if doesn't have enough" do
       use_cassette "withdraw_fail_not_enough" do
-        assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} == Binance.withdraw("BTC", "address", 0.000001)
+        assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} ==
+                 Binance.withdraw("BTC", "address", 0.000001)
+      end
+    end
+
+    test "withdraw with custom keys" do
+      use_cassette "withdraw_fail_wrong_key" do
+        assert {:error, {:binance_error, "API key does not exist"}} ==
+                 Binance.withdraw("api_key", "secret_key", "BTC", "address", 0.000001)
       end
     end
 
     test "can make a withdraw" do
       use_cassette "withdraw_success" do
-        #assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} == Binance.withdraw("BTC", "addresskopsdkdpo", 0.000001)
+        # assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} == Binance.withdraw("BTC", "addresskopsdkdpo", 0.000001)
       end
     end
   end

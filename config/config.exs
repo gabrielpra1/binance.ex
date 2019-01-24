@@ -6,7 +6,7 @@ config :binance,
   api_key: "",
   secret_key: ""
 
-if File.exists? "config/key.secret.exs" do
+if File.exists?("config/key.secret.exs") do
   import_config "key.secret.exs"
 end
 
