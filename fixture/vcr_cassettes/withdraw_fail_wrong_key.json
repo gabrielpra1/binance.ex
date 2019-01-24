@@ -1,0 +1,42 @@
+[
+  {
+    "request": {
+      "body": "address=address&amount=1.0e-6&asset=BTC&recvWindow=1000&timestamp=1548326200783&signature=***",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/withdraw.html"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"msg\":\"API key does not exist\",\"success\":false}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Thu, 24 Jan 2019 10:36:42 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Set-Cookie": "JSESSIONID=A6DF2FAA2CD6A0BF0A6FE50584526919; Path=/; Secure; HttpOnly",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'self'",
+        "X-Content-Security-Policy": "default-src 'self'",
+        "X-WebKit-CSP": "default-src 'self'",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 5f9453c691ff80c0367281bc0092a9fc.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "2ncgjJ3Dia4zI-i3V9RgUlChIqX4SGDUOfg5RxQjrBRL2Ru-xa80BQ=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

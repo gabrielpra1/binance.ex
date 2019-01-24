@@ -24,7 +24,7 @@ defmodule BinanceHttp do
 
     params =
       Map.merge(params, %{
-        timestamp: BinanceHelper.timestamp_ms,
+        timestamp: BinanceHelper.timestamp_ms(),
         recvWindow: receive_window
       })
 
@@ -34,18 +34,18 @@ defmodule BinanceHttp do
     get_binance("#{url}?#{argument_string}&signature=#{signature}", headers)
   end
 
-  def post_binance(url, params) do
+  def post_binance(url, api_key, secret_key, params) do
     argument_string =
       params
       |> Map.to_list()
       |> Enum.map(fn x -> Tuple.to_list(x) |> Enum.join("=") end)
       |> Enum.join("&")
 
-    signature = BinanceHelper.sign(BinanceHelper.secret_key, argument_string)
+    signature = BinanceHelper.sign(secret_key, argument_string)
     body = "#{argument_string}&signature=#{signature}"
 
     case HTTPoison.post("#{@endpoint}#{url}", body, [
-           {"X-MBX-APIKEY", BinanceHelper.api_key}
+           {"X-MBX-APIKEY", api_key}
          ]) do
       {:error, err} ->
         {:error, {:http_error, err}}
@@ -56,6 +56,10 @@ defmodule BinanceHttp do
           {:error, err} -> {:error, {:poison_decode_error, err}}
         end
     end
+  end
+
+  def post_binance(url, params) do
+    post_binance(url, BinanceHelper.api_key(), BinanceHelper.secret_key(), params)
   end
 
   defp parse_get_response({:ok, response}) do
