@@ -1,0 +1,42 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/depositAddress.html?asset=ETH&recvWindow=5000&timestamp=1548329133412&signature=***"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"address\":\"0xa2b7a84477b401549faa7f646d64b48e61eaed5b\",\"success\":true,\"addressTag\":\"\",\"asset\":\"ETH\"}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Thu, 24 Jan 2019 11:25:33 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Set-Cookie": "JSESSIONID=11A698747DCB630017A7B7B3AA47EEF1; Path=/; Secure; HttpOnly",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'self'",
+        "X-Content-Security-Policy": "default-src 'self'",
+        "X-WebKit-CSP": "default-src 'self'",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 d07104e17906cf397b085b148825b3ed.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "6VC5Ntj1Y9zVCc8_K2oYJNEN8z0F1jEVcoBnN8n94Fva2dwNM1o4nw=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

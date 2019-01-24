@@ -287,4 +287,18 @@ defmodule BinanceTest do
       end
     end
   end
+
+  describe "get deposit address" do
+    test "can get deposit address" do
+      use_cassette "get_deposit_address_success" do
+        assert {:ok,
+                %{
+                  "address" => "0xa2b7a84477b401549faa7f646d64b48e61eaed5b",
+                  "asset" => "ETH",
+                  "addressTag" => "",
+                  "success" => true
+                }} == Binance.get_deposit_address("ETH")
+      end
+    end
+  end
 end
