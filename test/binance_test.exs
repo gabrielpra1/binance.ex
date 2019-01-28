@@ -292,7 +292,7 @@ defmodule BinanceTest do
 
     test "can make a withdraw" do
       use_cassette "withdraw_success" do
-        # assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} == Binance.withdraw("BTC", "addresskopsdkdpo", 0.000001)
+        #assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} == Binance.withdraw("ETH", "0xa2b7a84477b401549faa7f646d64b48e61eaed5b", 0.001)
       end
     end
   end

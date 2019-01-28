@@ -141,11 +141,15 @@ defmodule Binance do
   """
 
   def get_account() do
+    get_account(BinanceHelper.secret_key(), BinanceHelper.api_key())
+  end
+
+  def get_account(api_key, secret_key) do
     case BinanceHttp.get_binance(
            "/api/v3/account",
            %{},
-           BinanceHelper.secret_key(),
-           BinanceHelper.api_key()
+           secret_key,
+           api_key
          ) do
       {:ok, data} -> {:ok, Binance.Account.new(data)}
       error -> error

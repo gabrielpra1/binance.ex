@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "request": {
+      "body": "address=0xa2b7a84477b401549faa7f646d64b48e61eaed5b&amount=0.001&asset=ETH&recvWindow=1000&timestamp=1548354540164&signature=***",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/withdraw.html"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"msg\":\"You don't have permission.\",\"success\":false}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Thu, 24 Jan 2019 18:29:01 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Set-Cookie": "JSESSIONID=CCFCCC39B46019BD842176978ABEEC93; Path=/; Secure; HttpOnly",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Content-Security-Policy": "default-src 'self'",
+        "X-Content-Security-Policy": "default-src 'self'",
+        "X-WebKit-CSP": "default-src 'self'",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 e633536cb695234078bf9479a955cec3.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "lp8I703z6R7QgXGZWO-EKcyed-ceXmaU0d_3FxPMTxAp_iLGFJvnPA=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
