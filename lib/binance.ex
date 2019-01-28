@@ -141,7 +141,7 @@ defmodule Binance do
   """
 
   def get_account() do
-    get_account(BinanceHelper.secret_key(), BinanceHelper.api_key())
+    get_account(BinanceHelper.api_key(), BinanceHelper.secret_key())
   end
 
   def get_account(api_key, secret_key) do
