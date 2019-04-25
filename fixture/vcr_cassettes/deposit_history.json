@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/depositHistory.html?recvWindow=5000&timestamp=1556222845188&signature=***"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"success\":true,\"depositList\":[{\"insertTime\":1556114796000,\"amount\":0.362728820000000000,\"address\":\"1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr\",\"addressTag\":\"\",\"txId\":\"2a995e1d8ad4c8512eed52d31e8a063fdc3f6d81bd2d6e4b2322f21529f28da0\",\"asset\":\"BTC\",\"status\":1},{\"insertTime\":1554418244000,\"amount\":0.120000000000000000,\"address\":\"1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr\",\"addressTag\":\"\",\"txId\":\"3adc2a340eb90dfa34d8efe0a2f86c9a7c2c7b14a353761f5933f7a7f09341c5\",\"asset\":\"BTC\",\"status\":1},{\"insertTime\":1554238157000,\"amount\":1.105523550000000000,\"address\":\"1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr\",\"addressTag\":\"\",\"txId\":\"7dc9a6fe43626bff9d7d73328fdfe0ed5248be42f7c48642833c03ac963cb868\",\"asset\":\"BTC\",\"status\":1},{\"insertTime\":1553711201000,\"amount\":0.873500000000000000,\"address\":\"1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr\",\"addressTag\":\"\",\"txId\":\"4b517de9e75eb36775354a98ce56ccf33b62cc1cffe4a5e0bbe16b58efdf9e82\",\"asset\":\"BTC\",\"status\":1},{\"insertTime\":1553616725000,\"amount\":0.105715000000000000,\"address\":\"1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr\",\"addressTag\":\"\",\"txId\":\"b6ecfa7778d5c003abebab249742e7c754bc3886d70059a2df42a419d1f36b79\",\"asset\":\"BTC\",\"status\":1},{\"insertTime\":1548260977000,\"amount\":0.289700000000000000,\"address\":\"0x99d66472969fdc8dea1b87267fbedfdb5beabeb0\",\"addressTag\":\"\",\"txId\":\"0x3fcf514ffe3925598699de7c2ac617cdf354e6f168f320dfbc80ff1e3dcca034\",\"asset\":\"ETH\",\"status\":1}]}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Thu, 25 Apr 2019 20:07:25 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Set-Cookie": "JSESSIONID=B3533840957EADD43421F5290FA8961E; Path=/; Secure; HttpOnly",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "origin-when-cross-origin",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 c3c79d4b701a0d344a641862e9711512.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "yOgzKmMi6h1TT-pilFqe-JjbUap2nbW8VXogLRcVC_mSPhllEuQJlQ=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

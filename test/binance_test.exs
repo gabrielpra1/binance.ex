@@ -295,9 +295,23 @@ defmodule BinanceTest do
         #assert {:error, {:binance_error, "Minimum withdrawal amount not met."}} == Binance.withdraw("ETH", "0xa2b7a84477b401549faa7f646d64b48e61eaed5b", 0.001)
       end
     end
+
+    test "get withdraw history" do
+      use_cassette "withdraw_history" do
+        assert {:ok,
+          %{
+            "withdrawList" => [
+              %{"address" => "0x1e79a1C5b9795a2AD7B029A5071cdbc1a4DB257e", "addressTag" => "", "amount" => 0.2897, "applyTime" => 1553708864000, "asset" => "ETH", "id" => "f60ddde4295c4b6fb73bfd291ae68383", "status" => 6, "successTime" => 1553709884000, "txId" => "0xe47fc4de1e43a2538a502c2397440df84160570e25ac6c7fb763d8dc736e06c6"},
+              %{"address" => "0x1e79a1C5b9795a2AD7B029A5071cdbc1a4DB257e", "addressTag" => "", "amount" => 0.2897, "applyTime" => 1553706652000, "asset" => "ETH", "id" => "e1b6d09c6d294dd1b011af00481a9a38", "status" => 1, "successTime" => 1553708497000},
+              %{"address" => "0x1e79a1C5b9795a2AD7B029A5071cdbc1a4DB257e", "addressTag" => "", "amount" => 0.2897, "applyTime" => 1553695416000, "asset" => "ETH", "id" => "161f1340c8e14ba5a128576a53d25378", "status" => 1, "successTime" => 1553697337000}
+            ],
+            "success" => true
+          }} == Binance.get_withdraw_history("api_key", "secret_key", %{})
+      end
+    end
   end
 
-  describe "get deposit address" do
+  describe "deposits" do
     test "can get deposit address" do
       use_cassette "get_deposit_address_success" do
         assert {:ok,
@@ -307,6 +321,23 @@ defmodule BinanceTest do
                   "addressTag" => "",
                   "success" => true
                 }} == Binance.get_deposit_address("ETH")
+      end
+    end
+
+    test "get deposit history" do
+      use_cassette "deposit_history" do
+        assert {:ok,
+          %{
+            "depositList" => [
+              %{"addressTag" => "", "address" => "1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr", "amount" => 0.36272882, "asset" => "BTC", "status" => 1, "txId" => "2a995e1d8ad4c8512eed52d31e8a063fdc3f6d81bd2d6e4b2322f21529f28da0", "insertTime" => 1556114796000},
+              %{"addressTag" => "", "status" => 1, "address" => "1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr", "amount" => 0.12, "asset" => "BTC", "insertTime" => 1554418244000, "txId" => "3adc2a340eb90dfa34d8efe0a2f86c9a7c2c7b14a353761f5933f7a7f09341c5"},
+              %{"addressTag" => "", "status" => 1, "address" => "1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr", "amount" => 1.10552355, "asset" => "BTC", "insertTime" => 1554238157000, "txId" => "7dc9a6fe43626bff9d7d73328fdfe0ed5248be42f7c48642833c03ac963cb868"},
+              %{"address" => "1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr", "addressTag" => "", "amount" => 0.8735, "asset" => "BTC", "insertTime" => 1553711201000, "status" => 1, "txId" => "4b517de9e75eb36775354a98ce56ccf33b62cc1cffe4a5e0bbe16b58efdf9e82"},
+              %{"address" => "1HiifV4ofJQmtqmHQBhheNwfe2JeJbtxMr", "addressTag" => "", "amount" => 0.105715, "asset" => "BTC", "insertTime" => 1553616725000, "status" => 1, "txId" => "b6ecfa7778d5c003abebab249742e7c754bc3886d70059a2df42a419d1f36b79"},
+              %{"address" => "0x99d66472969fdc8dea1b87267fbedfdb5beabeb0", "addressTag" => "", "amount" => 0.2897, "asset" => "ETH", "insertTime" => 1548260977000, "status" => 1, "txId" => "0x3fcf514ffe3925598699de7c2ac617cdf354e6f168f320dfbc80ff1e3dcca034"}
+            ],
+            "success" => true
+          }} == Binance.get_deposit_history("api_key", "secret_key", %{})
       end
     end
   end

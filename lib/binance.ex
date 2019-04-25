@@ -370,6 +370,14 @@ defmodule Binance do
     end
   end
 
+  def get_withdraw_history(api_key, secret_key, opts) do
+    BinanceHttp.get_binance("/wapi/v3/withdrawHistory.html", opts, secret_key, api_key)
+  end
+
+  def get_deposit_history(api_key, secret_key, opts) do
+    BinanceHttp.get_binance("/wapi/v3/depositHistory.html", opts, secret_key, api_key)
+  end
+
   def get_deposit_address(asset) do
     get_deposit_address(asset, BinanceHelper.api_key(), BinanceHelper.secret_key())
   end

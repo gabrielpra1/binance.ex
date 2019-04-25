@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "X-MBX-APIKEY": "***"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.binance.com/wapi/v3/withdrawHistory.html?recvWindow=5000&timestamp=1556155132476&signature=***"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"withdrawList\":[{\"amount\":0.28970000,\"address\":\"0x1e79a1C5b9795a2AD7B029A5071cdbc1a4DB257e\",\"successTime\":1553709884000,\"addressTag\":\"\",\"txId\":\"0xe47fc4de1e43a2538a502c2397440df84160570e25ac6c7fb763d8dc736e06c6\",\"id\":\"f60ddde4295c4b6fb73bfd291ae68383\",\"asset\":\"ETH\",\"applyTime\":1553708864000,\"status\":6},{\"amount\":0.28970000,\"address\":\"0x1e79a1C5b9795a2AD7B029A5071cdbc1a4DB257e\",\"successTime\":1553708497000,\"addressTag\":\"\",\"id\":\"e1b6d09c6d294dd1b011af00481a9a38\",\"asset\":\"ETH\",\"applyTime\":1553706652000,\"status\":1},{\"amount\":0.28970000,\"address\":\"0x1e79a1C5b9795a2AD7B029A5071cdbc1a4DB257e\",\"successTime\":1553697337000,\"addressTag\":\"\",\"id\":\"161f1340c8e14ba5a128576a53d25378\",\"asset\":\"ETH\",\"applyTime\":1553695416000,\"status\":1}],\"success\":true}",
+      "headers": {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Date": "Thu, 25 Apr 2019 01:18:53 GMT",
+        "Server": "nginx",
+        "Vary": "Accept-Encoding",
+        "Set-Cookie": "JSESSIONID=010470A1B0553A7A24ED0E01F1BB947C; Path=/; Secure; HttpOnly",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Xss-Protection": "1; mode=block",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "origin-when-cross-origin",
+        "X-Cache": "Miss from cloudfront",
+        "Via": "1.1 362ca50a98d78ba76da7ae2aca8b5c40.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "Lyy5-7L53vbC8kVRq_fueJ7zRbKOcN9SL7KgOSPFcW4w1djb1sNxFQ=="
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
