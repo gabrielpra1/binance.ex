@@ -35,16 +35,10 @@ defmodule BinanceHttp do
   end
 
   def post_binance(url, api_key, secret_key, params) do
-    argument_string =
-      params
-      |> Map.to_list()
-      |> Enum.map(fn x -> Tuple.to_list(x) |> Enum.join("=") end)
-      |> Enum.join("&")
-
+    argument_string = URI.encode_query(params)
     signature = BinanceHelper.sign(secret_key, argument_string)
-    body = "#{argument_string}&signature=#{signature}"
 
-    case HTTPoison.post("#{@endpoint}#{url}", body, [
+    case HTTPoison.post("#{@endpoint}#{url}?#{argument_string}&signature=#{signature}", "", [
            {"X-MBX-APIKEY", api_key}
          ]) do
       {:error, err} ->

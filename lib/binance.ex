@@ -386,6 +386,43 @@ defmodule Binance do
     BinanceHttp.get_binance("/wapi/v3/depositAddress.html", %{asset: asset}, secret_key, api_key)
   end
 
+  def sub_accounts_list(api_key, secret_key, params \\ %{}) do
+    BinanceHttp.get_binance("/wapi/v3/sub-account/list.html", params, secret_key, api_key)
+  end
+
+  def sub_accounts_list(params \\ %{}) do
+    sub_accounts_list(BinanceHelper.api_key(), BinanceHelper.secret_key(), params)
+  end
+
+  def sub_accounts_transfer_history(api_key, secret_key, params \\ %{}) do
+    BinanceHttp.get_binance("/wapi/v3/sub-account/transfer/history.html", params, secret_key, api_key)
+  end
+
+  def sub_accounts_transfer_history(params \\ %{}) do
+    sub_accounts_transfer_history(BinanceHelper.api_key(), BinanceHelper.secret_key(), params)
+  end
+
+  def sub_accounts_transfer(api_key, secret_key, params \\ %{}) do
+    params = Map.merge(%{timestamp: BinanceHelper.timestamp_ms(), recvWindow: 1000}, params)
+
+    case BinanceHttp.post_binance("/wapi/v3/sub-account/transfer.html", api_key, secret_key, params) do
+      {:ok, %{"success" => false, "msg" => msg}} -> {:error, {:binance_error, msg}}
+      data -> data
+    end
+  end
+
+  def sub_accounts_transfer(params \\ %{}) do
+    sub_accounts_transfer(BinanceHelper.api_key(), BinanceHelper.secret_key(), params)
+  end
+
+  def sub_accounts_assets(api_key, secret_key, params \\ %{}) do
+    BinanceHttp.get_binance("/wapi/v3/sub-account/assets.html", params, secret_key, api_key)
+  end
+
+  def sub_accounts_assets(params \\ %{}) do
+    sub_accounts_assets(BinanceHelper.api_key(), BinanceHelper.secret_key(), params)
+  end
+
   # Misc
 
   @doc """
