@@ -42,6 +42,14 @@ defmodule Binance.Futures do
     end
   end
 
+  @spec get_symbol_price :: {:ok, list(%Binance.SymbolPrice{})} | {:error, error()}
+  def get_symbol_price() do
+    case HTTPClient.get_binance("/fapi/v1/ticker/price") do
+      {:ok, data} -> {:ok, Enum.map(data, &Binance.SymbolPrice.new/1)}
+      err -> err
+    end
+  end
+
   @spec create_listen_key(map()) :: {:ok, map()} | {:error, error()}
   def create_listen_key(
         receiving_window \\ 1500,
