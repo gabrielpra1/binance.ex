@@ -1,7 +1,7 @@
-defmodule Binance.Config do
+defmodule Binance.Credentials do
   require Logger
 
-  @type t :: %Binance.Config{
+  @type t :: %Binance.Credentials{
           api_key: String.t(),
           api_secret: String.t()
         }
@@ -10,11 +10,13 @@ defmodule Binance.Config do
   defstruct [:api_key, :api_secret]
 
   @doc """
-  Get default API configs
+  Get default API credentials
 
   ## Examples
-      iex> Binance.Config.get()
+      iex> Binance.Credentials.get()
   """
+  def get(credentials \\ nil)
+
   def get(nil) do
     %__MODULE__{
       api_key: Application.get_env(:binance, :api_key),
@@ -23,14 +25,12 @@ defmodule Binance.Config do
   end
 
   @doc """
-  Get dynamic API configs via ENVs
+  Get dynamic API credentials via ENVs
 
   ## Examples
-      iex> Binance.Config.get(%{access_keys: ["B1_API_KEY", "B1_API_SECRET"]})
+      iex> Binance.Credentials.get({"B1_API_KEY", "B1_API_SECRET"})
   """
-  def get(%{
-        access_keys: [api_key_access, api_secret_access]
-      }) do
+  def get({api_key_access, api_secret_access}) do
     %__MODULE__{
       api_key: Application.get_env(:binance, api_key_access),
       api_secret: Application.get_env(:binance, api_secret_access)
@@ -38,6 +38,6 @@ defmodule Binance.Config do
   end
 
   def get(_) do
-    Logger.error("Incorrect config setup.")
+    Logger.error("Incorrect Credentials setup.")
   end
 end
