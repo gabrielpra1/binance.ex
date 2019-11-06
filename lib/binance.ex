@@ -1,9 +1,12 @@
 defmodule Binance do
+
+  @service :binance
+
   @doc """
   Pings binance API. Returns `{:ok, %{}}` if successful, `{:error, reason}` otherwise
   """
   def ping() do
-    BinanceHttp.get_binance("/api/v1/ping")
+    BinanceHttp.get(@service, "/api/v1/ping")
   end
 
   @doc """
@@ -18,14 +21,14 @@ defmodule Binance do
 
   """
   def get_server_time() do
-    case BinanceHttp.get_binance("/api/v1/time") do
+    case BinanceHttp.get(@service, "/api/v1/time") do
       {:ok, %{"serverTime" => time}} -> {:ok, time}
       err -> err
     end
   end
 
   def get_exchange_info() do
-    case BinanceHttp.get_binance("/api/v1/exchangeInfo") do
+    case BinanceHttp.get(@service, "/api/v1/exchangeInfo") do
       {:ok, data} -> {:ok, Binance.ExchangeInfo.new(data)}
       err -> err
     end
@@ -51,7 +54,7 @@ defmodule Binance do
   ```
   """
   def get_all_prices() do
-    case BinanceHttp.get_binance("/api/v1/ticker/allPrices") do
+    case BinanceHttp.get(@service, "/api/v1/ticker/allPrices") do
       {:ok, data} ->
         {:ok, Enum.map(data, &Binance.SymbolPrice.new(&1))}
 
@@ -87,7 +90,7 @@ defmodule Binance do
   end
 
   def get_ticker(symbol) when is_binary(symbol) do
-    case BinanceHttp.get_binance("/api/v1/ticker/24hr?symbol=#{symbol}") do
+    case BinanceHttp.get(@service, "/api/v1/ticker/24hr?symbol=#{symbol}") do
       {:ok, data} -> {:ok, Binance.Ticker.new(data)}
       err -> err
     end
@@ -122,7 +125,7 @@ defmodule Binance do
   ```
   """
   def get_depth(symbol, limit) do
-    case BinanceHttp.get_binance("/api/v1/depth?symbol=#{symbol}&limit=#{limit}") do
+    case BinanceHttp.get(@service, "/api/v1/depth?symbol=#{symbol}&limit=#{limit}") do
       {:ok, data} -> {:ok, Binance.OrderBook.new(data)}
       err -> err
     end
@@ -145,7 +148,7 @@ defmodule Binance do
   end
 
   def get_account(api_key, secret_key) do
-    case BinanceHttp.get_binance(
+    case BinanceHttp.get(@service,
            "/api/v3/account",
            %{},
            secret_key,
@@ -209,7 +212,7 @@ defmodule Binance do
       |> Map.merge(unless(is_nil(time_in_force), do: %{timeInForce: time_in_force}, else: %{}))
       |> Map.merge(unless(is_nil(price), do: %{price: price}, else: %{}))
 
-    case BinanceHttp.post_binance("/api/v3/order", arguments) do
+    case BinanceHttp.post(@service, "/api/v3/order", arguments) do
       {:ok, %{"code" => code, "msg" => msg}} ->
         {:error, {:binance_error, %{code: code, msg: msg}}}
 
@@ -364,18 +367,18 @@ defmodule Binance do
       timestamp: BinanceHelper.timestamp_ms()
     }
 
-    case BinanceHttp.post_binance("/wapi/v3/withdraw.html", api_key, secret_key, arguments) do
+    case BinanceHttp.post(@service, "/wapi/v3/withdraw.html", api_key, secret_key, arguments) do
       {:ok, %{"success" => false, "msg" => msg}} -> {:error, {:binance_error, msg}}
       data -> data
     end
   end
 
   def get_withdraw_history(api_key, secret_key, opts) do
-    BinanceHttp.get_binance("/wapi/v3/withdrawHistory.html", opts, secret_key, api_key)
+    BinanceHttp.get(@service, "/wapi/v3/withdrawHistory.html", opts, secret_key, api_key)
   end
 
   def get_deposit_history(api_key, secret_key, opts) do
-    BinanceHttp.get_binance("/wapi/v3/depositHistory.html", opts, secret_key, api_key)
+    BinanceHttp.get(@service, "/wapi/v3/depositHistory.html", opts, secret_key, api_key)
   end
 
   def get_deposit_address(asset) do
@@ -383,11 +386,11 @@ defmodule Binance do
   end
 
   def get_deposit_address(asset, api_key, secret_key) do
-    BinanceHttp.get_binance("/wapi/v3/depositAddress.html", %{asset: asset}, secret_key, api_key)
+    BinanceHttp.get(@service, "/wapi/v3/depositAddress.html", %{asset: asset}, secret_key, api_key)
   end
 
   def sub_accounts_list(api_key, secret_key, params \\ %{}) do
-    BinanceHttp.get_binance("/wapi/v3/sub-account/list.html", params, secret_key, api_key)
+    BinanceHttp.get(@service, "/wapi/v3/sub-account/list.html", params, secret_key, api_key)
   end
 
   def sub_accounts_list(params \\ %{}) do
@@ -395,7 +398,7 @@ defmodule Binance do
   end
 
   def sub_accounts_transfer_history(api_key, secret_key, params \\ %{}) do
-    BinanceHttp.get_binance("/wapi/v3/sub-account/transfer/history.html", params, secret_key, api_key)
+    BinanceHttp.get(@service, "/wapi/v3/sub-account/transfer/history.html", params, secret_key, api_key)
   end
 
   def sub_accounts_transfer_history(params \\ %{}) do
@@ -405,7 +408,7 @@ defmodule Binance do
   def sub_accounts_transfer(api_key, secret_key, params \\ %{}) do
     params = Map.merge(%{timestamp: BinanceHelper.timestamp_ms(), recvWindow: 1000}, params)
 
-    case BinanceHttp.post_binance("/wapi/v3/sub-account/transfer.html", api_key, secret_key, params) do
+    case BinanceHttp.post(@service, "/wapi/v3/sub-account/transfer.html", api_key, secret_key, params) do
       {:ok, %{"success" => false, "msg" => msg}} -> {:error, {:binance_error, msg}}
       data -> data
     end
@@ -416,7 +419,7 @@ defmodule Binance do
   end
 
   def sub_accounts_assets(api_key, secret_key, params \\ %{}) do
-    BinanceHttp.get_binance("/wapi/v3/sub-account/assets.html", params, secret_key, api_key)
+    BinanceHttp.get(@service, "/wapi/v3/sub-account/assets.html", params, secret_key, api_key)
   end
 
   def sub_accounts_assets(params \\ %{}) do
