@@ -97,7 +97,7 @@ defmodule Binance.Futures do
   def get_balance(secret_key \\ nil, api_key \\ nil) do
     case BinanceHttp.get(@service, "/fapi/v1/balance", %{}, secret_key, api_key) do
       {:ok, data} ->
-        {:ok, Enum.map(data, &Binance.Futures.Balance.new/1)}
+        {:ok, Binance.Futures.Balance.new(data)}
 
       error ->
         error
